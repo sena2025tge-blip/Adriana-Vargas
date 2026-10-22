@@ -1,0 +1,6 @@
+{
+  "summary":  "Plan estructurado para la sincronización automática y transparente del prototipo con Google Sheets. Incluye estrategia de upsert (actualización de filas existentes por documento/ficha), disparadores automáticos al completar módulos, casos y evaluación, reconexión de sesión en segundo plano y badges de sincronización no intrusivos.",
+  "updatedAt":  "2026-10-21T15:48:19.853078805Z",
+  "requestFeedback":  true,
+  "userFacing":  true
+}

@@ -1,0 +1,121 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@layer base {
+  body {
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Outfit', 'Plus Jakarta Sans', sans-serif;
+  }
+}
+
+/* Screen blur transition effect when switching dark/light mode */
+@keyframes screenBlurTransition {
+  0% {
+    backdrop-filter: blur(0px);
+    opacity: 0;
+  }
+  40% {
+    backdrop-filter: blur(14px);
+    opacity: 1;
+  }
+  100% {
+    backdrop-filter: blur(0px);
+    opacity: 0;
+  }
+}
+
+.animate-screen-blur {
+  animation: screenBlurTransition 500ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  pointer-events: none;
+}
+
+/* Lightning strike, screen flash and shake animations for Calificador Express */
+@keyframes lightningFlash {
+  0% {
+    opacity: 0;
+  }
+  15% {
+    opacity: 0.95;
+    background-color: rgba(224, 242, 254, 0.92);
+  }
+  25% {
+    opacity: 0.2;
+  }
+  35% {
+    opacity: 1;
+    background-color: rgba(191, 219, 254, 0.95);
+  }
+  50% {
+    opacity: 0.15;
+  }
+  65% {
+    opacity: 0.85;
+    background-color: rgba(147, 197, 253, 0.85);
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes screenShake {
+  0% { transform: translate(0, 0) rotate(0deg); }
+  10% { transform: translate(-10px, 6px) rotate(-1.5deg); }
+  20% { transform: translate(10px, -6px) rotate(1.5deg); }
+  30% { transform: translate(-12px, -4px) rotate(-2deg); }
+  40% { transform: translate(12px, 4px) rotate(2deg); }
+  50% { transform: translate(-8px, 6px) rotate(-1deg); }
+  60% { transform: translate(8px, -4px) rotate(1deg); }
+  70% { transform: translate(-4px, 2px) rotate(-0.5deg); }
+  80% { transform: translate(4px, -2px) rotate(0.5deg); }
+  100% { transform: translate(0, 0) rotate(0deg); }
+}
+
+@keyframes electricPulse {
+  0%, 100% {
+    filter: drop-shadow(0 0 15px rgba(56, 189, 248, 0.9)) drop-shadow(0 0 35px rgba(99, 102, 241, 0.8));
+    transform: scale(1);
+  }
+  50% {
+    filter: drop-shadow(0 0 30px rgba(239, 68, 68, 0.95)) drop-shadow(0 0 50px rgba(249, 115, 22, 0.9));
+    transform: scale(1.06);
+  }
+}
+
+.animate-lightning-flash {
+  animation: lightningFlash 750ms ease-out forwards;
+}
+
+.animate-screen-shake {
+  animation: screenShake 650ms cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}
+
+.animate-electric-pulse {
+  animation: electricPulse 350ms infinite;
+}
+
+@media print {
+  /* Print formatting for SENA certificate */
+  body * {
+    visibility: hidden;
+  }
+  #sena-certificate-print, #sena-certificate-print * {
+    visibility: visible;
+  }
+  #sena-certificate-print {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    border: none !important;
+    box-shadow: none !important;
+    background: white !important;
+    color: #0f172a !important;
+    z-index: 99999;
+  }
+}

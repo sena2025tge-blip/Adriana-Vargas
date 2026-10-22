@@ -1,0 +1,6 @@
+{
+  "name": "Inducción SENA - Reglamento, Derechos y Certificación",
+  "description": "Plataforma interactiva y gamificada para la inducción de aprendices SENA: dominio del reglamento, derechos, deberes, simulador de casos y certificación oficial.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
