@@ -1,5 +1,5 @@
 import React from 'react';
-import { User, Award, Moon, Sun, FileSpreadsheet, Zap, ExternalLink, RefreshCw, CheckCircle2, Cloud, Info, BookOpen, ShieldCheck, HelpCircle, FileCheck, ListChecks } from 'lucide-react';
+import { User, Award, Moon, Sun, FileSpreadsheet, Zap, ExternalLink, RefreshCw, CheckCircle2, Cloud, Info, BookOpen, ShieldCheck, HelpCircle, FileCheck, ListChecks, X } from 'lucide-react';
 import { ApprenticeProfile, UserRole } from '../types/induction';
 
 interface HeaderProps {
@@ -12,6 +12,7 @@ interface HeaderProps {
   isCertified: boolean;
   isDarkMode: boolean;
   onToggleDarkMode: () => void;
+  onLogout: () => void;
   syncStatus?: {
     state: 'idle' | 'syncing' | 'synced' | 'error' | 'queued';
     message: string;
@@ -29,6 +30,7 @@ export const Header: React.FC<HeaderProps> = ({
   isCertified,
   isDarkMode,
   onToggleDarkMode,
+  onLogout,
   syncStatus,
 }) => {
   const sheetUrl = (() => {
@@ -241,6 +243,13 @@ export const Header: React.FC<HeaderProps> = ({
               ) : (
                 <Moon className="w-4 h-4 text-slate-700 transition-transform hover:-rotate-12" />
               )}
+            </button>
+            <button
+              onClick={onLogout}
+              className="p-2 rounded-lg border border-slate-300 dark:border-slate-700 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-red-400 hover:bg-red-100 dark:hover:bg-red-900 transition-colors shrink-0"
+              title="Cerrar sesión"
+            >
+              <X className="w-4 h-4" />
             </button>
           </div>
         </div>

@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
-import { onAuthStateChanged } from 'firebase/auth';
+import { onAuthStateChanged, signOut } from 'firebase/auth';
 import { doc, getDoc, setDoc, onSnapshot } from 'firebase/firestore';
 import { UserProfile } from '../types/induction';
 import { auth, db } from '../services/firebase';
@@ -8,12 +8,14 @@ interface UserContextType {
   userProfile: UserProfile | null;
   loading: boolean;
   updateUserProfile: (profile: UserProfile) => Promise<void>;
+  logout: () => Promise<void>;
 }
 
 const UserContext = createContext<UserContextType>({ 
   userProfile: null, 
   loading: true,
   updateUserProfile: async () => {},
+  logout: async () => {},
 });
 
 export const UserProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
@@ -23,6 +25,11 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const updateUserProfile = async (profile: UserProfile) => {
     await setDoc(doc(db, 'users', profile.uid), profile);
     setUserProfile(profile);
+  };
+  
+  const logout = async () => {
+    await signOut(auth);
+    setUserProfile(null);
   };
 
   useEffect(() => {
@@ -63,10 +70,11 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({ children
   }, [auth, db]);
 
   return (
-    <UserContext.Provider value={{ userProfile, loading, updateUserProfile }}>
+    <UserContext.Provider value={{ userProfile, loading, updateUserProfile, logout }}>
       {children}
     </UserContext.Provider>
   );
 };
+
 
 export const useUser = () => useContext(UserContext);

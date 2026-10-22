@@ -54,7 +54,7 @@ export default function App() {
 }
 
 function MainApp() {
-  const { userProfile, loading } = useUser();
+  const { userProfile, loading, logout } = useUser();
 
   // Dark Mode state with localStorage and HTML class sync
   const [isDarkMode, setIsDarkMode] = useState<boolean>(() => {
@@ -392,6 +392,7 @@ function MainApp() {
         isCertified={examPassed}
         isDarkMode={isDarkMode}
         onToggleDarkMode={handleToggleDarkMode}
+        onLogout={logout}
         syncStatus={syncStatus}
       />
 
